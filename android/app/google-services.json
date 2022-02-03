@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1096579023633",
+    "project_id": "iceburst-6b6a2",
+    "storage_bucket": "iceburst-6b6a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096579023633:android:030221b34eeb27433bc2b0",
+        "android_client_info": {
+          "package_name": "com.iceburst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096579023633-thhngr2lsvoi4qejkd52kqs0l3hqg6ea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iceburst",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1096579023633-29bebimc53hlb2pged1qd294mrrvc68o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtKcf3WVQMwz0xr4qBHwIkWBSvswwIvPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096579023633-29bebimc53hlb2pged1qd294mrrvc68o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
