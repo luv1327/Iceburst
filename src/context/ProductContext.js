@@ -2,6 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import allProducts from '../components/ProductsData';
 import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from './AuthContext';
+import Snackbar from 'react-native-snackbar';
 
 const ProductContext = createContext();
 
@@ -10,9 +11,24 @@ const ProductProvider = ({children}) => {
   const {user} = useContext(AuthContext);
   const [loading, setLoading] = useState(true); // Set loading to true on component mount
   const [cart, setCart] = useState([]); // Initial empty array of cart items
-
+  const [orderData, setOrderData] = useState({});
+  const [successResponse, setSuccessResponse] = useState(null);
+  const images = [
+    'https://i.ibb.co/VMkGx4Y/spanish-Summer-Backdrop.jpg',
+    'https://i.ibb.co/6NBD07J/freshpesso-Backdrop.jpg',
+    'https://i.ibb.co/c3525Xb/botanical-Cooler-Backdrop.jpg',
+    'https://i.ibb.co/SXyQPs2/blush-Spritzer-Backdrop.jpg',
+    'https://i.ibb.co/QCyQsNb/tropical-Muddle-Backdrop.jpg',
+  ];
   useEffect(() => {
-    const subscriber = firestore()
+    getCartData();
+    return () => {
+      setCart([]);
+    };
+  }, [user?.uid]);
+
+  const getCartData = () => {
+    firestore()
       .collection('Users')
       .doc(user?.uid)
       .onSnapshot(documentSnapshot => {
@@ -21,20 +37,16 @@ const ProductProvider = ({children}) => {
           setLoading(false);
         }
       });
-
-    return () => subscriber();
-  }, [user?.uid]);
-
-  const totalQuantity = () => {
-    const quantityArr = cart.map(item => item.quantity);
-    const totalCount = quantityArr.reduce(
-      (previousValue, currentValue) => previousValue + currentValue,
-      0,
-    );
-    return totalCount;
   };
 
   const handleAddCart = item => {
+    Snackbar.show({
+      text: 'Item Added To Cart',
+      duration: Snackbar.LENGTH_SHORT,
+      textColor: '#fff',
+      backgroundColor: '#000',
+      fontFamily: 'Poppins-Regular',
+    });
     firestore()
       .collection('Users')
       .doc(user?.uid)
@@ -48,6 +60,24 @@ const ProductProvider = ({children}) => {
         console.log(error);
       });
   };
+
+  const totalQuantity = () => {
+    const quantityArr = cart.map(item => item.quantity);
+    const totalCount = quantityArr.reduce(
+      (previousValue, currentValue) => previousValue + currentValue,
+      0,
+    );
+    return totalCount;
+  };
+
+  // const totalAmount = () => {
+  //   const priceArr = cart.map(item => item.price);
+  //   const totalPrice = priceArr.reduce(
+  //     (previousValue, currentValue) => previousValue + currentValue,
+  //     0,
+  //   );
+  //   return totalPrice;
+  // };
 
   const handleRemoveCart = item => {
     firestore()
@@ -121,6 +151,11 @@ const ProductProvider = ({children}) => {
         isAlreadyInCart,
         handleRemoveCart,
         totalQuantity,
+        orderData,
+        setOrderData,
+        successResponse,
+        setSuccessResponse,
+        images,
       }}>
       {children}
     </ProductContext.Provider>

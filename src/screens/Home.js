@@ -1,24 +1,17 @@
-import React, {useContext} from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {AuthContext} from '../context/AuthContext';
+import React from 'react';
 import Products from '../components/Products';
+import styled from 'styled-components';
+import DeliveryMessage from '../components/DeliveryMessage';
 
 export default function Home({navigation}) {
-  const {handleLogout, firestoreUser} = useContext(AuthContext);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: 'white',
-      }}>
-      <Text> Home </Text>
+    <Container>
+      <DeliveryMessage message="We Current Deliver Only In Mumbai" />
       <Products navigation={navigation} />
-      <Text> {firestoreUser?.email} </Text>
-      <TouchableOpacity onPress={handleLogout}>
-        <Text> Logout </Text>
-      </TouchableOpacity>
-    </View>
+    </Container>
   );
 }
+
+const Container = styled.SafeAreaView`
+  background-color: #fff;
+`;

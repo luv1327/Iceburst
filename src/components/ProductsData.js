@@ -5,7 +5,7 @@ const DATA = [
     quantity: 1,
     price: 199,
     id: 1,
-    color: 'yellow',
+    color: '#FFD800',
     description:
       'Fresh Mint & Lime makes up for an amazing tropical concoction. Beat the heat with this zesty and refreshing flavour burst.',
     pairings: {
@@ -24,7 +24,7 @@ const DATA = [
     quantity: 1,
     price: 199,
     id: 2,
-    color: 'pink',
+    color: '#e75480',
     description:
       'Teleport yourself to a sunny beach in Spain while you sip upon a burst of fruity and berrylicious flavors.',
     pairings: {
@@ -38,30 +38,12 @@ const DATA = [
     posterBackImage: 'https://i.ibb.co/QCBRZ5c/spanish-Summer-Back-Poster.jpg',
   },
   {
-    name: 'Blush Spritzer',
-    flavour: 'Watermelon And Basil',
-    quantity: 1,
-    price: 199,
-    id: 3,
-    color: 'red',
-    description: `Who doesn't love Watermelon, especially when its blush red complemented with fresh Basil and Star Anise. Enjoy this sweet & aromatic burst of flavors.`,
-    pairings: {
-      mocktail: '2 iceburst cubes + Soda ( 120 ml )',
-      cocktail: '2 iceburst cubes + Vodka ( 50 ml ) Top up with Soda',
-    },
-    /*eslint-disable */
-    backdropImage: 'https://i.ibb.co/SXyQPs2/blush-Spritzer-Backdrop.jpg',
-    posterFrontImage:
-      'https://i.ibb.co/s3vQbTG/blush-Spritzer-Front-Poster.jpg',
-    posterBackImage: 'https://i.ibb.co/pRZVDNT/blush-Spritzer-Back-Poster.jpg',
-  },
-  {
-    name: 'Botabotanical Cooler',
+    name: 'Botanical Cooler',
     flavour: 'Cucumber And Ginger',
     quantity: 1,
     price: 199,
     id: 4,
-    color: 'green',
+    color: '#228b22',
     description:
       'This garden fresh concoction is a medley of cucumber, rosemary and ginger giving you a botanical burst of flavors.',
     pairings: {
@@ -76,12 +58,30 @@ const DATA = [
       'https://i.ibb.co/Kh101kZ/botanical-Cooler-Back-Poster.jpg',
   },
   {
+    name: 'Blush Spritzer',
+    flavour: 'Watermelon And Basil',
+    quantity: 1,
+    price: 199,
+    id: 3,
+    color: '#ff0000',
+    description: `Who doesn't love Watermelon, especially when its blush red complemented with fresh Basil and Star Anise. Enjoy this sweet & aromatic burst of flavors.`,
+    pairings: {
+      mocktail: '2 iceburst cubes + Soda ( 120 ml )',
+      cocktail: '2 iceburst cubes + Vodka ( 50 ml ) Top up with Soda',
+    },
+    /*eslint-disable */
+    backdropImage: 'https://i.ibb.co/SXyQPs2/blush-Spritzer-Backdrop.jpg',
+    posterFrontImage:
+      'https://i.ibb.co/s3vQbTG/blush-Spritzer-Front-Poster.jpg',
+    posterBackImage: 'https://i.ibb.co/pRZVDNT/blush-Spritzer-Back-Poster.jpg',
+  },
+  {
     name: 'Freshpesso',
     flavour: 'Coffee And Vanilla',
     quantity: 1,
     price: 199,
     id: 5,
-    color: 'brown',
+    color: '#654321',
     description:
       'Get an energetic jolt from this burst of fresh roasted coffee with an essence of French Vanilla.',
     pairings: {

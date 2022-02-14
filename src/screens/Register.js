@@ -1,11 +1,12 @@
 import React, {useContext} from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, TextInput, TouchableOpacity} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
+import styled from 'styled-components';
 
 export default function Register() {
   const {setEmail, setPassword, handleRegister} = useContext(AuthContext);
   return (
-    <View>
+    <Container>
       <TextInput placeholder="Email" onChangeText={email => setEmail(email)} />
       <TextInput
         placeholder="Password"
@@ -14,6 +15,12 @@ export default function Register() {
       <TouchableOpacity onPress={handleRegister}>
         <Text>Register</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 }
+
+const Container = styled.View`
+  background-color: red;
+  height: 100%;
+  width: 100%;
+`;

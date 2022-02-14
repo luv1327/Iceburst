@@ -7,7 +7,7 @@ export default function HamburgerIcon({navigation}) {
     <TouchableOpacity
       style={{marginLeft: 15}}
       onPress={() => navigation.toggleDrawer()}>
-      <Icon name="menu" size={20} color="black" />
+      <Icon name="menu" size={25} color="black" />
     </TouchableOpacity>
   );
 }

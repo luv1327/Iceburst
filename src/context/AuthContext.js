@@ -10,9 +10,16 @@ const AuthProvider = ({children}) => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState(null);
   const [firestoreUser, setFirestoreUser] = useState(null);
+  const [userShippingData, setUserShippingData] = useState({});
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [phoneValue, setPhoneValue] = useState('');
+  const [formattedValue, setFormattedValue] = useState('');
+  const [currentOrder, setCurrentOrder] = useState({});
+  const [toggleRegister, setToggleRegister] = useState(true);
+  const [errMessage, setErrorMessage] = useState('');
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
+  async function onAuthStateChanged(user) {
     setUser(user);
     if (user) {
       firestore()
@@ -30,13 +37,15 @@ const AuthProvider = ({children}) => {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  const handleRegister = async () => {
+  //======= Auth Section  =========//
+  const handleRegister = async (email, password) => {
     try {
       const response = await auth().createUserWithEmailAndPassword(
         email,
         password,
       );
       setUser(response.user);
+      setErrorMessage('');
       await firestore()
         .collection('Users')
         .doc(response.user.uid)
@@ -48,16 +57,19 @@ const AuthProvider = ({children}) => {
           console.log('User added!');
         });
     } catch (err) {
-      console.log(err);
+      const message = err.message.substring(err.message.indexOf(']') + 1);
+      setErrorMessage(message);
     }
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (email, password) => {
     try {
       const response = await auth().signInWithEmailAndPassword(email, password);
       setUser(response.user);
+      setErrorMessage('');
     } catch (err) {
-      console.log(err);
+      const message = err.message.substring(err.message.indexOf(']') + 1);
+      setErrorMessage(message);
     }
   };
 
@@ -68,6 +80,36 @@ const AuthProvider = ({children}) => {
     } catch (err) {
       console.log(err);
     }
+  };
+  //======= Auth Section  =========//
+
+  //======= Shipping Section  =========//
+  const handleAddShippingDetailsIntoUser = () => {
+    firestore()
+      .collection('Users')
+      .doc(user.uid)
+      .update({
+        shipping: userShippingData,
+      })
+      .then(() => {
+        console.log('Shipping added!');
+      });
+  };
+
+  //======= Previous Orders Section  =========//
+
+  //======= Shipping Section  =========//
+
+  const handleCurrentOrder = data => {
+    firestore()
+      .collection('Users')
+      .doc(user.uid)
+      .update({
+        currentOrder: data,
+        cart: [],
+      })
+      .then(() => console.log('Current Order added!'))
+      .catch(err => console.log(err));
   };
 
   return (
@@ -83,6 +125,22 @@ const AuthProvider = ({children}) => {
         handleLogin,
         handleLogout,
         firestoreUser,
+        userShippingData,
+        setUserShippingData,
+        mobileNumber,
+        setMobileNumber,
+        formattedValue,
+        setFormattedValue,
+        phoneValue,
+        setPhoneValue,
+        handleAddShippingDetailsIntoUser,
+        currentOrder,
+        setCurrentOrder,
+        handleCurrentOrder,
+        toggleRegister,
+        setToggleRegister,
+        errMessage,
+        setErrorMessage,
       }}>
       {children}
     </AuthContext.Provider>

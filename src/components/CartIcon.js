@@ -1,29 +1,55 @@
 import React, {useContext} from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import {View, StyleSheet, Image, Text} from 'react-native';
 import {ProductContext} from '../context/ProductContext';
+import styled from 'styled-components';
 
 export default function CartIcon({navigation}) {
   const {cart} = useContext(ProductContext);
   return (
-    <TouchableOpacity
-      style={{marginRight: 15}}
-      onPress={() => navigation.navigate('Cart')}>
+    <CartContainer onPress={() => navigation.navigate('Cart')}>
       {cart.length > 0 ? (
-        <View style={styles.badge}></View>
+        <View style={styles.cartIcon}>
+          <View style={styles.badge}>
+            <Text style={styles.cartLength}> {cart.length}</Text>
+          </View>
+          <Image
+            style={{height: 25, width: 25}}
+            //eslint-disable-next-line
+            source={require('../assets/images/bag.png')}
+          />
+        </View>
       ) : (
-        <Icon name="shopping-cart" size={20} color="black" />
+        <Image
+          style={{height: 25, width: 25}}
+          //eslint-disable-next-line
+          source={require('../assets/images/bag.png')}
+        />
       )}
-    </TouchableOpacity>
+    </CartContainer>
   );
 }
 
 const styles = StyleSheet.create({
   badge: {
-    height: 8,
-    width: 8,
-    backgroundColor: 'tomato',
-    borderRadius: 50,
-    alignSelf: 'flex-end',
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    backgroundColor: '#000',
+    width: 15,
+    height: 15,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cartLength: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    alignSelf: 'center',
   },
 });
+
+const CartContainer = styled.TouchableOpacity`
+  margin-right: 15px;
+`;
